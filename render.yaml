@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: predictive-maintenance-ai
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn web.server:app --host 0.0.0.0 --port $PORT

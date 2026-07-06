@@ -1,0 +1,63 @@
+{
+  "features": [
+    "time_in_cycles",
+    "sensor_2",
+    "sensor_3",
+    "sensor_4",
+    "sensor_7",
+    "sensor_9",
+    "sensor_11",
+    "sensor_12",
+    "sensor_14",
+    "sensor_17",
+    "sensor_20",
+    "sensor_3_rolling_mean",
+    "sensor_4_rolling_mean",
+    "sensor_9_rolling_mean",
+    "sensor_14_rolling_mean",
+    "sensor_17_rolling_mean",
+    "sensor_3_delta",
+    "sensor_4_delta",
+    "sensor_9_delta",
+    "sensor_14_delta",
+    "sensor_17_delta",
+    "cycle_ratio"
+  ],
+  "confusion_matrix": [
+    [
+      12134,
+      630
+    ],
+    [
+      199,
+      133
+    ]
+  ],
+  "classification_report": {
+    "0": {
+      "precision": 0.9838644287683451,
+      "recall": 0.9506424318395488,
+      "f1-score": 0.966968163525521,
+      "support": 12764.0
+    },
+    "1": {
+      "precision": 0.1743119266055046,
+      "recall": 0.4006024096385542,
+      "f1-score": 0.24292237442922374,
+      "support": 332.0
+    },
+    "accuracy": 0.9366982284667074,
+    "macro avg": {
+      "precision": 0.5790881776869249,
+      "recall": 0.6756224207390515,
+      "f1-score": 0.6049452689773723,
+      "support": 13096.0
+    },
+    "weighted avg": {
+      "precision": 0.9633412590433862,
+      "recall": 0.9366982284667074,
+      "f1-score": 0.9486126960560668,
+      "support": 13096.0
+    }
+  }
+}

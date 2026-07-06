@@ -1,0 +1,75 @@
+{
+  "features": [
+    "time_in_cycles",
+    "sensor_2",
+    "sensor_3",
+    "sensor_4",
+    "sensor_7",
+    "sensor_9",
+    "sensor_11",
+    "sensor_12",
+    "sensor_14",
+    "sensor_17",
+    "sensor_20",
+    "sensor_3_rolling_mean",
+    "sensor_4_rolling_mean",
+    "sensor_9_rolling_mean",
+    "sensor_14_rolling_mean",
+    "sensor_17_rolling_mean",
+    "sensor_3_delta",
+    "sensor_4_delta",
+    "sensor_9_delta",
+    "sensor_14_delta",
+    "sensor_17_delta",
+    "cycle_ratio"
+  ],
+  "confusion_matrix": [
+    [
+      12127,
+      637
+    ],
+    [
+      2,
+      330
+    ]
+  ],
+  "classification_report": {
+    "0": {
+      "precision": 0.9998351059444307,
+      "recall": 0.9500940144155438,
+      "f1-score": 0.9743301329691078,
+      "support": 12764.0
+    },
+    "1": {
+      "precision": 0.34126163391933817,
+      "recall": 0.9939759036144579,
+      "f1-score": 0.5080831408775982,
+      "support": 332.0
+    },
+    "accuracy": 0.9512064752596212,
+    "macro avg": {
+      "precision": 0.6705483699318844,
+      "recall": 0.9720349590150008,
+      "f1-score": 0.741206636923353,
+      "support": 13096.0
+    },
+    "weighted avg": {
+      "precision": 0.9831394437031105,
+      "recall": 0.9512064752596212,
+      "f1-score": 0.9625101878427806,
+      "support": 13096.0
+    }
+  },
+  "top_feature_importance": {
+    "cycle_ratio": 0.3037541060653481,
+    "sensor_17_rolling_mean": 0.12922400044537344,
+    "sensor_4_rolling_mean": 0.12665468326581875,
+    "sensor_3_rolling_mean": 0.07837031999143937,
+    "sensor_4": 0.06057814114173382,
+    "sensor_11": 0.05768193508829861,
+    "sensor_12": 0.05501687210831867,
+    "sensor_7": 0.036002456997810926,
+    "time_in_cycles": 0.027666052418811465,
+    "sensor_20": 0.02677084646035573
+  }
+}

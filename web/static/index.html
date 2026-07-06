@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reliability Monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <aside class="status-panel">
+      <div class="brand-block">
+        <img class="brand-logo" src="/static/assets/logo2.webp" alt="Howmet Aerospace logo">
+        <div class="brand-copy">
+          <p class="eyebrow">Monitoring Node</p>
+          <h2>Reliability Monitor</h2>
+        </div>
+      </div>
+      <p class="panel-copy">
+        Industrial anomaly screening for uploaded operating history, maintenance prioritization, and local AI-assisted interpretation.
+      </p>
+      <div class="schema-card">
+        <h3>Accepted input</h3>
+        <p>Recommended format for highest accuracy:</p>
+        <ul class="schema-list">
+          <li>Identifiers: <code>unit_number</code>, <code>time_in_cycles</code></li>
+          <li>Operating settings: <code>op_setting_1</code> to <code>op_setting_3</code></li>
+          <li>Sensor channels: <code>sensor_1</code> to <code>sensor_21</code></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="hero">
+        <p class="eyebrow">Operations Analytics</p>
+        <h1>Detect abnormal operating patterns before they become production failures.</h1>
+        <p class="hero-copy">
+          Upload sensor history, score anomaly likelihood, flag critical operating windows, and generate a concise maintenance interpretation from the same workspace.
+        </p>
+      </section>
+
+      <section class="workspace">
+        <div class="upload-card">
+          <div class="section-heading">
+            <div>
+              <p class="panel-label">Data Intake</p>
+              <h3>Upload operating history</h3>
+            </div>
+            <p>Use a `.csv` or `.txt` file.</p>
+          </div>
+          <form id="upload-form">
+            <label class="upload-dropzone" for="dataset-file">
+              <input id="dataset-file" name="file" type="file" accept=".csv,.txt" required>
+              <span class="upload-title">Drag and drop a dataset here</span>
+              <span class="upload-subtitle">or browse files from your device</span>
+              <span id="selected-file" class="selected-file">No file selected</span>
+            </label>
+            <div class="form-row">
+              <label class="text-field">
+                <span>Ollama model</span>
+                <input id="ollama-model" list="ollama-models" type="text" value="phi3:latest" placeholder="phi3:latest">
+                <datalist id="ollama-models"></datalist>
+              </label>
+            </div>
+            <button id="submit-button" type="submit">Analyze dataset</button>
+          </form>
+          <p id="feedback" class="feedback"></p>
+        </div>
+
+        <div class="metrics-grid" id="metrics-grid">
+          <article class="metric-card">
+            <p class="metric-label">Load</p>
+            <p>Rows processed</p>
+            <strong id="rows-processed">0</strong>
+          </article>
+          <article class="metric-card">
+            <p class="metric-label">Assets</p>
+            <p>Engines detected</p>
+            <strong id="engines-detected">0</strong>
+          </article>
+          <article class="metric-card">
+            <p class="metric-label">Risk</p>
+            <p>Predicted anomalies</p>
+            <strong id="predicted-anomalies">0</strong>
+          </article>
+          <article class="metric-card">
+            <p class="metric-label">Critical</p>
+            <p>Critical rows</p>
+            <strong id="critical-rows">0</strong>
+          </article>
+        </div>
+
+        <div class="results-card">
+          <div class="results-header">
+            <div>
+              <p class="panel-label">AI Brief</p>
+              <h3>Operational summary</h3>
+              <p>AI-generated interpretation of anomaly volume, criticality, and recommended maintenance urgency.</p>
+            </div>
+          </div>
+          <div id="summary-box" class="summary-box">
+            The operational summary will appear here after analysis.
+          </div>
+        </div>
+
+        <div class="results-card">
+          <div class="results-header">
+            <div>
+              <p class="panel-label">Scored Rows</p>
+              <h3>Scored output preview</h3>
+              <p>Each row includes anomaly classification, probability, severity tier, and a recommended maintenance window.</p>
+            </div>
+            <a id="download-link" class="download-link hidden" href="#">Download enriched CSV</a>
+          </div>
+          <div class="table-shell">
+            <table>
+              <thead>
+                <tr>
+                  <th>Engine</th>
+                  <th>Cycle</th>
+                  <th>Anomaly</th>
+                  <th>Probability</th>
+                  <th>Severity</th>
+                  <th>Recommendation</th>
+                </tr>
+              </thead>
+              <tbody id="results-body">
+                <tr>
+                  <td colspan="6" class="empty-state">Upload a dataset to view predictions.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button id="chat-toggle" class="chat-toggle" type="button">Howmet AI</button>
+  <section id="chatbot-panel" class="chatbot-panel hidden">
+    <div class="chatbot-header">
+      <div>
+        <p class="eyebrow">AI Assistant</p>
+        <h3>Howmet Operations Copilot</h3>
+      </div>
+      <button id="chat-close" class="chat-close" type="button">Close</button>
+    </div>
+    <div id="chat-messages" class="chat-messages">
+      <article class="chat-message assistant">
+        Upload a dataset, then ask for anomaly interpretation, maintenance urgency, or a concise operator summary.
+      </article>
+    </div>
+    <form id="chat-form" class="chat-form">
+      <input id="chat-input" type="text" placeholder="Ask about the uploaded analysis..." autocomplete="off">
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
