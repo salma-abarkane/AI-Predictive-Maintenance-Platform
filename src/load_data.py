@@ -1,11 +1,12 @@
 import pandas as pd
 from pathlib import Path
 
-BASE_DIR = Path(r"C:\Users\yassi\OneDrive\Documents\projet pfa\data\raw\PM")
+BASE_DIR = Path(__file__).resolve().parent.parent
+RAW_DIR = BASE_DIR / "data" / "raw" / "PM"
 
-TRAIN_PATH = BASE_DIR / "PM_train.txt"
-TEST_PATH = BASE_DIR / "PM_test.txt"
-TRUTH_PATH = BASE_DIR / "PM_truth.txt"
+TRAIN_PATH = RAW_DIR / "PM_train.txt"
+TEST_PATH = RAW_DIR / "PM_test.txt"
+TRUTH_PATH = RAW_DIR / "PM_truth.txt"
 
 COLUMNS = [
     "unit_number",

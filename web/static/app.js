@@ -68,10 +68,10 @@ form.addEventListener("submit", async (event) => {
   formData.append("file", fileInput.files[0]);
   formData.append("ollama_model", ollamaModelInput.value.trim() || "llama3.2");
 
-  submitButton.disabled = true;
-  submitButton.textContent = "Running prediction...";
-  feedback.textContent = "Uploading dataset and computing predictions...";
-  summaryBox.textContent = "Generating anomaly summary. The first Ollama response can take some time while the model loads.";
+    submitButton.disabled = true;
+    submitButton.textContent = "Running analysis...";
+    feedback.textContent = "Uploading dataset and computing predictions...";
+    summaryBox.textContent = "Generating operational summary. The first LLM response may take a short while.";
 
   try {
     const response = await fetch("/api/predict", {
@@ -89,12 +89,12 @@ form.addEventListener("submit", async (event) => {
     renderLlmSummary(payload.llm_summary);
     downloadLink.href = payload.download_url;
     downloadLink.classList.remove("hidden");
-    feedback.textContent = "Prediction completed successfully.";
+    feedback.textContent = "Analysis completed successfully.";
   } catch (error) {
     feedback.textContent = error.message;
   } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = "Run anomaly prediction";
+      submitButton.disabled = false;
+      submitButton.textContent = "Run Analysis";
   }
 });
 
@@ -108,7 +108,7 @@ chatForm.addEventListener("submit", async (event) => {
 
   appendChatMessage("user", message);
   chatInput.value = "";
-  appendChatMessage("assistant", "Thinking... The first Ollama answer can take a little while.");
+    appendChatMessage("assistant", "Thinking... The first LLM response may take a short while.");
 
   try {
     const response = await fetch("/api/chat", {

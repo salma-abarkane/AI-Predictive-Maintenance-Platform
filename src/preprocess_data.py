@@ -1,8 +1,7 @@
 import pandas as pd
 from pathlib import Path
 
-
-BASE_DIR = Path(r"C:\Users\yassi\OneDrive\Documents\projet pfa")
+BASE_DIR = Path(__file__).resolve().parent.parent
 RAW_DIR = BASE_DIR / "data" / "raw" / "PM"
 PROCESSED_DIR = BASE_DIR / "data" / "processed"
 

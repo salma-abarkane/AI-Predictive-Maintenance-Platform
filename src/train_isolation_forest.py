@@ -6,8 +6,7 @@ from sklearn.ensemble import IsolationForest
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.preprocessing import StandardScaler
 
-
-BASE_DIR = Path(r"C:\Users\yassi\OneDrive\Documents\projet pfa")
+BASE_DIR = Path(__file__).resolve().parent.parent
 PROCESSED_DIR = BASE_DIR / "data" / "processed"
 REPORTS_DIR = BASE_DIR / "reports"
 

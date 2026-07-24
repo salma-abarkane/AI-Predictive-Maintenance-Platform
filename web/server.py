@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import os
 import shutil
-import sys
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
@@ -12,23 +11,24 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 
-BASE_DIR = Path(r"C:\Users\yassi\OneDrive\Documents\projet pfa")
+BASE_DIR = Path(__file__).resolve().parent.parent
 WEB_DIR = BASE_DIR / "web"
 STATIC_DIR = WEB_DIR / "static"
 UPLOADS_DIR = BASE_DIR / "uploads"
 RESULTS_DIR = BASE_DIR / "results"
 
-sys.path.append(str(BASE_DIR / "src"))
+import sys
+sys.path.append(str(BASE_DIR))
 
-from ml_pipeline import predict_from_file
-from ollama_client import DEFAULT_OLLAMA_MODEL, list_models, resolve_model, safe_ollama_generate
+from src.ml_pipeline import predict_from_file
+from src.ollama_client import DEFAULT_OLLAMA_MODEL, list_models, resolve_model, safe_ollama_generate
 
 
 UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 LATEST_CONTEXT: dict = {}
 
-app = FastAPI(title="Predictive Maintenance Web App")
+app = FastAPI(title="Industrial Predictive Maintenance Dashboard")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

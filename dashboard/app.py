@@ -5,10 +5,12 @@ import sys
 import pandas as pd
 import streamlit as st
 
-BASE_DIR = Path(r"C:\Users\yassi\OneDrive\Documents\projet pfa")
-sys.path.append(str(BASE_DIR / "src"))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-from diagnostic_agent import compute_engine_baseline, diagnose_engine
+import sys
+sys.path.append(str(BASE_DIR))
+
+from src.diagnostic_agent import compute_engine_baseline, diagnose_engine
 PROCESSED_DIR = BASE_DIR / "data" / "processed"
 REPORTS_DIR = BASE_DIR / "reports"
 
@@ -19,7 +21,7 @@ RF_METRICS_PATH = REPORTS_DIR / "random_forest_metrics.json"
 XGB_METRICS_PATH = REPORTS_DIR / "xgboost_metrics.json"
 
 
-st.set_page_config(page_title="Predictive Maintenance Dashboard", layout="wide")
+st.set_page_config(page_title="Industrial Predictive Maintenance Dashboard", layout="wide")
 
 
 @st.cache_data
@@ -97,14 +99,14 @@ def main() -> None:
     xgb_metrics = load_json(XGB_METRICS_PATH) if XGB_METRICS_PATH.exists() else None
     baseline = compute_engine_baseline(train_df)
 
-    st.title("Industrial Anomaly Detection Dashboard")
-    st.caption("NASA C-MAPSS based predictive maintenance prototype")
+    st.title("Industrial Predictive Maintenance Dashboard")
+    st.caption("NASA C-MAPSS-based predictive maintenance prototype")
 
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Train rows", f"{len(train_df):,}")
-    col2.metric("Test rows", f"{len(test_df):,}")
-    col3.metric("Train anomalies", int(train_df["anomaly_label"].sum()))
-    col4.metric("Test anomalies", int(test_df["anomaly_label"].sum()))
+    col1.metric("Train Rows", f"{len(train_df):,}")
+    col2.metric("Test Rows", f"{len(test_df):,}")
+    col3.metric("Train Anomalies", int(train_df["anomaly_label"].sum()))
+    col4.metric("Test Anomalies", int(test_df["anomaly_label"].sum()))
 
     st.subheader("Model Comparison")
     comparison_rows = [
@@ -160,9 +162,9 @@ def main() -> None:
         st.bar_chart(anomaly_chart)
 
     st.subheader("Sensor Trends by Engine")
-    engine_id = st.selectbox("Select engine", sorted(test_df["unit_number"].unique()))
+    engine_id = st.selectbox("Select Engine", sorted(test_df["unit_number"].unique()))
     sensor_name = st.selectbox(
-        "Select sensor",
+        "Select Sensor",
         ["sensor_3", "sensor_4", "sensor_9", "sensor_14", "sensor_17"],
     )
 
@@ -170,11 +172,11 @@ def main() -> None:
     engine_df = engine_df.sort_values("time_in_cycles")
     diagnostic = diagnose_engine(engine_df, baseline)
 
-    st.subheader("Diagnostic Agent")
+    st.subheader("Diagnostic Assistant")
     diag_col1, diag_col2 = st.columns(2)
     diag_col1.metric("Status", diagnostic.status)
     diag_col2.metric("Severity", diagnostic.severity)
-    st.write("Probable causes:")
+    st.write("Probable Causes")
     for cause in diagnostic.probable_causes:
         st.write(f"- {cause}")
     st.info(diagnostic.recommendation)
