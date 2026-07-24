@@ -752,3 +752,4 @@ Special thanks to:
 **Built with ❤️ using Python, FastAPI, Streamlit, Machine Learning and Artificial Intelligence.**
 
 </div>
+
